@@ -8,3 +8,7 @@ def set_new_contact():
     phone_number = elements['phone'].get()
     contact = f' {name} {surname} {phone_number}'
     elements['all_List'].insert(END, contact)
+
+def print_contacts_list(contacts_list):
+    for contact in contacts_list:
+        controller.add_to_listbox(contact)

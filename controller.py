@@ -10,13 +10,19 @@ def add_contact():
 
 def add_to_listbox(contact):
     elements['all_List'].insert(END, contact)
+    send_contacts_list_to_model()
 
 def get_elements():
     return elements
 
 def delete_contact():
     elements['all_List'].delete(elements['all_List'].curselection()[0])
+    send_contacts_list_to_model()
 
+
+def send_contacts_list_to_model():
+    contacts_list = elements['all_List'].get(0, END)
+    model.write_contacts(contacts_list)
 
 def start():
    
@@ -44,9 +50,10 @@ def start():
     add_contact_btn = Button(frm, text='Добавить контакт',command = add_contact).grid(row = 4, column = 0 )
     delete_contact_btn = Button(frm, text='Удалить контакт', command = delete_contact).grid(row = 4, column = 1)
 
-    all_contacts = Listbox(frm)
-    all_contacts.grid(row = 5, column = 0)
-    elements['all_List'] = all_contacts
+    all_contacts_lbox = Listbox(frm)
+    all_contacts_lbox.grid(row = 5, column = 0)
+    elements['all_List'] = all_contacts_lbox
+    model.read_contacts()
    
 
     root.mainloop()
